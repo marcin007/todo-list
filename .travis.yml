@@ -2,4 +2,14 @@ language: java
 jdk: oraclejdk11
 
 before_install:
-  - chmod +x mvnw
+- chmod +x mvnw
+
+env:
+  global:
+    - secure: "BQ5gYgZIEqj5qYHjm7kSMitDY0KDFAh5W48DAIdosEYtWIkhIi+3KBgeBQvObeL/AcYXQ8fKf/7T5ZdQFdJjTjYtCRurob4p0Y6gaM9osRbrXSfw6eJyOeetHkH6pcp51/lCL5rEM75h8ux3zAxnkRjKRTRFPGr1qFeApvh6YxS0V8I/fh5dChMJ30QmVm/j7gk1KqVTYJJHffQTynVAp8KHE9Rqbmo5rxsZfNVGJp6Ln/qLLfWGE4OLhpsctWiSwRgONIhSW0BIbWItPkz/EHOY5f8+6bx92BYegQM8d4n7JHoFbFcPIspO410qybFG5kvWi1GrE10OLYJgdSx5zem9Mg7Xfauj6JofUjro9ZV7YmGDqX9fVTXtj3grSN4FEsSDLeuvYnwIUWpbr4fIAHcqMhwg3gUKVSpEAk9QRotkPqG0tD0M96Yyt0E26sZu4Ilxg8u2plnsLkRWhAs53WaBumyR209TPSEQIy226uy62Q/kjF+PPj/vCKupKaBI/xoxbfRvxCQy3MpJl7CXOzIJzc6fTXDl4aNxyOb1sJE8hPT4hMzqPv9AqYH62PWivPa/IHuIQ2LRZiSBYSbCxamppJMWmDguuug1wXJQi4vhcWXx5xeFFzhbJunuwmnQ306e7S+BEPaqvi4SQX636pfyk1pgo7mnqRlxqcdnSww="
+
+addons:
+  sonarcloud:
+    organization: marcin007-todolist
+    token:
+      secure: "$SONAR_TOKEN"
