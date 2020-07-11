@@ -1,4 +1,4 @@
-package com.marcinwo.todolist.entity;
+package com.marcinwo.todolist.app.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
