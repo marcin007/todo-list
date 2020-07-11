@@ -15,4 +15,5 @@ public class PatchUserDTO {
     private String lastName;
     private String userName;
     private String avatarUrl;
+    private String password;
 }
