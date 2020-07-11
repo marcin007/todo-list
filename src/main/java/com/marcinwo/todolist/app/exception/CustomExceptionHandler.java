@@ -25,4 +25,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ApiError> handlerTaskBoardNotFoundException(WebRequest request, TaskBoardNotFoundException e){
         return new ResponseEntity<>(new ApiError("Task board not found exception", HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UserUnauthorizedException.class)
+    public ResponseEntity<ApiError> handlerUserUnauthorizedException(WebRequest w, UserUnauthorizedException e){
+        return new ResponseEntity<>(new ApiError("User unauthorized.", HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
+    }
 }
