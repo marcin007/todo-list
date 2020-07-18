@@ -1,18 +1,35 @@
 package com.marcinwo.todolist.app.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity
 public class MultiHttpSecurityConfiguration {
+
+    private UserDetailsService userDetailsService;
+
+    @Autowired
+    public MultiHttpSecurityConfiguration(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -26,12 +43,26 @@ public class MultiHttpSecurityConfiguration {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
+                    .headers().frameOptions().disable()//
+                    .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()//
+                    .antMatchers("/h2console/**").permitAll()//
                     .and()
                     .antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers("/api/**").permitAll()
-                    .anyRequest().authenticated();
+                    .anyRequest().authenticated()
+                    .and()
+                    .httpBasic();
+        }
+
+        @Bean
+        @Override
+        //todo w jaki sposób jest to ze sobą powiązane? zadna nazwa na to nie wskazuje (nie maja nic wspolnego)
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
         }
     }
 
@@ -47,7 +78,18 @@ public class MultiHttpSecurityConfiguration {
                     .authorizeRequests()
                     .antMatchers("/", "/login", "/register", "/h2console/**").permitAll()
                     .antMatchers("/configuration/ui", "/configuration/security", "/webjars/**").permitAll()
-                    .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll();
+                    .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .formLogin().loginPage("/login")
+                    .permitAll()
+                    .loginProcessingUrl("/login")
+                    .failureUrl("/login?error")
+                    .and()
+                    .logout()
+                    .logoutSuccessUrl("/")
+
+            ;
         }
 
         @Override
