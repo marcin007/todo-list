@@ -60,7 +60,7 @@ public class RegisterView extends VerticalLayout {
     }
 
     private void onRegisterButtonClick(ClickEvent<Button> clickEvent) {
-        User user = new User(name.getValue(), lastName.getValue(), userName.getValue(), password.getValue());
+        User user = new User(name.getValue(), lastName.getValue(), userName.getValue(), password.getValue(), email.getValue());
         userService.save(user);
         clearForm();
     }
