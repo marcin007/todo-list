@@ -1,4 +1,4 @@
-package com.marcinwo.todolist.frontend;
+package com.marcinwo.todolist.frontend.view;
 
 import com.marcinwo.todolist.app.service.UserService;
 import com.vaadin.flow.component.html.H1;
