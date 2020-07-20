@@ -29,4 +29,6 @@ public class AbstractEntity implements Serializable {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    private Boolean hasExpired = false;
 }
