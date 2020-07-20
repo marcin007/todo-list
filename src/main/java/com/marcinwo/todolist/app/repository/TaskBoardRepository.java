@@ -10,6 +10,6 @@ import java.util.Set;
 @Repository
 public interface TaskBoardRepository extends JpaRepository<TasksBoard, Long> {
     Optional<TasksBoard> findByIdAndOwnerIdAndHasExpiredFalse(Long id, Long userId);
-    //Set<TasksBoard> findAllAndHasExpiredFalse();
+    Set<TasksBoard> findAllByUsersUserName(String s);
     Optional<TasksBoard> findAllByIdAndHasExpiredFalse(Long id);
 }
