@@ -1,6 +1,7 @@
 package com.marcinwo.todolist.app;
 
 import com.marcinwo.todolist.app.entity.User;
+import com.marcinwo.todolist.app.exception.UserNotFoundException;
 import com.marcinwo.todolist.app.repository.UserRepository;
 import com.marcinwo.todolist.app.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,7 @@ public class CurrentUser {
 
     public User get() {
         String username = SecurityUtils.getUsername();
-        User user = userRepository.findByUserNameAndHasExpiredFalse(username).orElseThrow();// TODO: 12.07.2020
-        return user;
+        return userRepository.findByUserNameAndHasExpiredFalse(username)
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
     }
-
 }
