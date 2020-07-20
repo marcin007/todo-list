@@ -21,8 +21,8 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new ApiError("Task not found exception", HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(TaskBoardNotFoundException.class)
-    public ResponseEntity<ApiError> handlerTaskBoardNotFoundException(WebRequest request, TaskBoardNotFoundException e){
+    @ExceptionHandler(TasksBoardNotFoundException.class)
+    public ResponseEntity<ApiError> handlerTaskBoardNotFoundException(WebRequest request, TasksBoardNotFoundException e){
         return new ResponseEntity<>(new ApiError("Task board not found exception", HttpStatus.NOT_FOUND.value()), HttpStatus.NOT_FOUND);
     }
 
