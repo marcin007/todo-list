@@ -30,4 +30,9 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ApiError> handlerUserUnauthorizedException(WebRequest w, UserUnauthorizedException e){
         return new ResponseEntity<>(new ApiError("User unauthorized.", HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(PriorityNotFoundException.class)
+    public ResponseEntity<ApiError> handlerPriorityNotFoundException(WebRequest w, UserUnauthorizedException e){
+        return new ResponseEntity<>(new ApiError("Priority not found exception.", HttpStatus.UNAUTHORIZED.value()), HttpStatus.UNAUTHORIZED);
+    }
 }
