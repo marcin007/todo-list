@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PatchUserDTO {
 
-    private String name;
+    private String firstName;
     private String lastName;
     private String userName;
     private String avatarUrl;

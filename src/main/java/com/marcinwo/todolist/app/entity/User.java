@@ -17,7 +17,7 @@ import java.util.Set;
 public class User extends AbstractEntity {
 
     @NonNull
-    private String name;
+    private String firstName;
 
     @NonNull
     private String lastName;
@@ -30,15 +30,17 @@ public class User extends AbstractEntity {
     private String password;
 
     private String avatarUrl;
+
+    @NonNull
     private String email;
 
     @Column(unique = true)
     private String activationCode;
 
-    private boolean isExpired = false;
-    private boolean isEnabled = false;
-    private boolean isLocked = false;
-    private boolean isCredentialsExpired = false;
+    private Boolean isExpired = false;
+    private Boolean isEnabled = false;
+    private Boolean isLocked = false;
+    private Boolean isCredentialsExpired = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
