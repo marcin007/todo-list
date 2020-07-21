@@ -1,16 +1,14 @@
-package com.marcinwo.todolist.entity;
+package com.marcinwo.todolist.app.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.atmosphere.config.service.Get;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -22,7 +20,7 @@ public class Task extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "tasks_board_id", nullable = false)
-    private TasksBoard tasksBoards;
+    private TasksBoard tasksBoard;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -30,7 +28,11 @@ public class Task extends AbstractEntity {
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> users = new ArrayList<>();
+    private Set<User> users = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
     @ManyToOne
     @JoinColumn(name = "priority_id", nullable = false)
