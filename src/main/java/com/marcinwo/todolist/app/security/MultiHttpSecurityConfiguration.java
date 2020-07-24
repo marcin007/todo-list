@@ -1,9 +1,10 @@
 package com.marcinwo.todolist.app.security;
 
+import com.marcinwo.todolist.app.security.jwt.JwtTokenFilter;
+import com.marcinwo.todolist.app.security.jwt.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -15,8 +16,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = false)
 public class MultiHttpSecurityConfiguration {
 
     private UserDetailsService userDetailsService;
@@ -40,6 +42,13 @@ public class MultiHttpSecurityConfiguration {
     @Configuration
     public static class ApiSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+        private JwtTokenProvider jwtTokenProvider;
+
+        @Autowired
+        public ApiSecurityConfiguration(JwtTokenProvider jwtTokenProvider) {
+            this.jwtTokenProvider = jwtTokenProvider;
+        }
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.csrf().disable()
@@ -47,20 +56,19 @@ public class MultiHttpSecurityConfiguration {
                     .and()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
-                    .authorizeRequests()//
-                    .antMatchers("/h2console/**").permitAll()//
+                    .authorizeRequests()
+                    .antMatchers("/h2console/**").permitAll()
                     .and()
                     .antMatcher("/api/**")
                     .authorizeRequests()
                     .antMatchers("/api/**").permitAll()
                     .anyRequest().authenticated()
                     .and()
-                    .httpBasic();
+                    .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         }
 
         @Bean
         @Override
-        //todo w jaki sposób jest to ze sobą powiązane? zadna nazwa na to nie wskazuje (nie maja nic wspolnego)
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
         }
@@ -77,7 +85,7 @@ public class MultiHttpSecurityConfiguration {
                     .and()
                     .authorizeRequests()
                     .antMatchers("/", "/login", "/register", "/h2console/**").permitAll()
-                    .antMatchers("/configuration/ui", "/configuration/security", "/webjars/**").permitAll()
+                    .antMatchers("/configuration/ui", "/configuration/security", "/webjars/**", "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html**").permitAll()
                     .requestMatchers(SecurityUtils::isFrameworkInternalRequest).permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -126,5 +134,6 @@ public class MultiHttpSecurityConfiguration {
                     "/frontend-es5/**", "/frontend-es6/**");
         }
     }
+
 
 }
