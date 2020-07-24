@@ -1,4 +1,4 @@
-package com.marcinwo.todolist.frontend;
+package com.marcinwo.todolist.frontend.view;
 
 import com.marcinwo.todolist.app.entity.User;
 import com.marcinwo.todolist.app.service.UserService;
@@ -60,7 +60,8 @@ public class RegisterView extends VerticalLayout {
     }
 
     private void onRegisterButtonClick(ClickEvent<Button> clickEvent) {
-        User user = new User(name.getValue(), lastName.getValue(), userName.getValue(), password.getValue(), email.getValue());
+        User user = new User(name.getValue(), lastName.getValue(),
+                userName.getValue(), password.getValue(), email.getValue());
         userService.save(user);
         clearForm();
     }
