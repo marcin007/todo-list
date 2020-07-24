@@ -13,8 +13,6 @@ import java.util.Set;
 public interface TaskRepository extends JpaRepository<Task, Long > {
     Set<Task> findAllByUsersIdAndHasExpiredFalse(Long userId);
     Optional<Task>findByIdAndHasExpiredFalse(Long ig);
-    Set<Task> findAllByUsersAndHasExpiredFalse(User user);
-
     List<Task> findAllByUsersUserNameAndHasExpiredFalse(String username);
 
 }
