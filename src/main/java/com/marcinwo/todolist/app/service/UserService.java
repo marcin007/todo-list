@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {
@@ -37,9 +36,9 @@ public class UserService {
         return users;
     }
 
-    public User findCurrentUser(){
+    public User findCurrentUser() {
         return userRepository.findByUserNameAndHasExpiredFalse(SecurityUtils.getUsername())
-                .orElseThrow(()->new UserNotFoundException("Username not found."));
+                .orElseThrow(() -> new UserNotFoundException("Username not found."));
     }
 
     public User findById(Long id) {
@@ -61,10 +60,10 @@ public class UserService {
 
     public User updateUser(Long id, PatchUserDTO patchUserDTO) {
         User user = findById(id);
-        if (patchUserDTO.getName() != null) {
-            user.setName(patchUserDTO.getName());
+        if (patchUserDTO.getFirstName() != null) {
+            user.setFirstName(patchUserDTO.getFirstName());
         }
-        if (patchUserDTO.getName() != null) {
+        if (patchUserDTO.getLastName() != null) {
             user.setLastName(patchUserDTO.getLastName());
         }
         if (patchUserDTO.getUserName() != null) {
@@ -73,16 +72,14 @@ public class UserService {
         if (patchUserDTO.getAvatarUrl() != null) {
             user.setAvatarUrl(patchUserDTO.getAvatarUrl());
         }
-        if(patchUserDTO.getPassword() != null){
+        if (patchUserDTO.getPassword() != null) {
             user.setPassword(passwordEncoder.encode(patchUserDTO.getPassword()));
         }
         return userRepository.save(user);
     }
 
 
-
-
     public User findByUsername(String username) {
-        return userRepository.findByUserNameAndHasExpiredFalse(username).orElseThrow(()-> new RuntimeException("sd"));
+        return userRepository.findByUserNameAndHasExpiredFalse(username).orElseThrow(() -> new RuntimeException("sd"));
     }
 }
