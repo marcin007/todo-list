@@ -1,8 +1,8 @@
-INSERT INTO users(name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
+INSERT INTO users(first_name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
                   is_credentials_expired, has_expired)
 values ('Maryla', 'Rodowicz', 'm', '$2a$10$ffNADwF.yPvjUdXkjB4S7eAl5f1/EZXFDeSttqPYIF5cay3ReNSWi', 'www.asd.pl', false, true, false, false, false);
 
-INSERT INTO users(name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
+INSERT INTO users(first_name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
                   is_credentials_expired, has_expired)
 values ('Zenek', 'Martyniuk', 'z', '$2a$10$ffNADwF.yPvjUdXkjB4S7eAl5f1/EZXFDeSttqPYIF5cay3ReNSWi', 'www.haha.pl', false, true, false, false, false);
 
@@ -38,15 +38,18 @@ INSERT INTO priorities(name, has_expired)
 values ('REGULAR', false),
        ('STAR', false);
 
-INSERT INTO tasks(tasks_board_id, priority_id, name, description, status, has_expired)
-VALUES (2, 1, 'Zostanie krolem DiscoPolo', 'Podlasie pierwsze.', 'DONE', false);
-INSERT INTO tasks(tasks_board_id, priority_id, name, description, status, has_expired)
-VALUES (2, 2, 'Nagrac plyte zenka', '1000 sztuk', 'TODO', false);
-INSERT INTO tasks(tasks_board_id, priority_id, name, description, status, has_expired)
-VALUES (1, 1, 'Nagrac teledysk z Maryla', 'w lesie', 'DONE', false);
+INSERT INTO tasks(tasks_board_id, priority_id, name, description, status,owner_id, has_expired)
+VALUES (3, 1, 'Zostanie krolem DiscoPolo', 'Podlasie pierwsze.', 'DONE', 2, false);
+INSERT INTO tasks(tasks_board_id, priority_id, name, description, status,owner_id, has_expired)
+VALUES (3, 2, 'Nagrac plyte zenka', '1000 sztuk', 'TODO', 2, false);
+INSERT INTO tasks(tasks_board_id, priority_id, name, description, status,owner_id, has_expired)
+VALUES (1, 1, 'Nagrac teledysk z Maryla', 'w lesie', 'DONE',1, false);
+INSERT INTO tasks(tasks_board_id, priority_id, name, description, status,owner_id, has_expired)
+VALUES (2, 2, 'Wpolne zadanie', 'cos razem', 'DONE',1, false);
 
 INSERT INTO task_users(user_id, task_id)
 VALUES (2, 1),
        (2, 2),
-       (1, 3);
+       (1, 3),
+       (1,4);
 
