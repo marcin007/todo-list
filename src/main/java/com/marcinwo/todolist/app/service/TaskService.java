@@ -35,6 +35,9 @@ public class TaskService {
     public Set<Task> findAllByUserId(Long id) {
         return taskRepository.findAllByUsersIdAndHasExpiredFalse(id);
     }
+    public Set<Task> findAllByTasksBoardId(Long id) {
+        return taskRepository.findAllByTasksBoardId(id);
+    }
 
 
     public List<Task> findAllByUsername(String username) {

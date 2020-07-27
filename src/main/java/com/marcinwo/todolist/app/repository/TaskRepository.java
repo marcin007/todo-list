@@ -14,5 +14,6 @@ public interface TaskRepository extends JpaRepository<Task, Long > {
     Set<Task> findAllByUsersIdAndHasExpiredFalse(Long userId);
     Optional<Task>findByIdAndHasExpiredFalse(Long ig);
     List<Task> findAllByUsersUserNameAndHasExpiredFalse(String username);
+    Set<Task> findAllByTasksBoardId(Long id);
 
 }
