@@ -1,8 +1,10 @@
 package com.marcinwo.todolist.frontend.view;
 
 import com.marcinwo.todolist.app.entity.TasksBoard;
+import com.marcinwo.todolist.app.entity.User;
 import com.marcinwo.todolist.app.service.TaskBoardService;
 import com.marcinwo.todolist.app.service.UserService;
+import com.marcinwo.todolist.frontend.component.BoardMiniature;
 import com.marcinwo.todolist.frontend.component.CreateBoardDialog;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
@@ -10,6 +12,8 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Set;
 
 
 @Route("boards")
@@ -29,11 +33,23 @@ public class BoardsView extends VerticalLayout {
     }
 
     private void createLayout() {
+        reloadLayout();
+        dialog.addDetachListener(detachEvent -> {
+            reloadLayout();
+            dialog.clear();
+        });
+    }
+
+    private void reloadLayout() {
+        removeAll();
+
+        User currentUser = userService.findCurrentUser();
+        Set<TasksBoard> currentUserBoards = taskBoardService.findAllByUsername(currentUser.getUserName());
+        for (TasksBoard b : currentUserBoards) {
+            add(new BoardMiniature(b));
+        }
+
         add(createNewBoardButton);
-
-        dialog.addDetachListener(detachEvent -> dialog.clear());
-
-//        dialog.addDialogCloseActionListener(detachEvent -> dialog.clear());
     }
 
     private void onCreateNewBoardButtonClick(ClickEvent<Button> e) {
@@ -53,12 +69,13 @@ public class BoardsView extends VerticalLayout {
         } else {
             Notification.show("Correct data");
         }
-
     }
 
     private void onCancelButtonClick() {
         dialog.clear();
         dialog.close();
     }
+
+
 
 }
