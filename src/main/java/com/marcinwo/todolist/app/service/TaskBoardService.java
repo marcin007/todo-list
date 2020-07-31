@@ -26,7 +26,7 @@ public class TaskBoardService {
         this.taskRepository = taskRepository;
     }
 
-    public Set<TasksBoard> findAll(String username) {
+    public Set<TasksBoard> findAllByUsername(String username) {
         return taskBoardRepository.findAllByUsersUserName(username);
     }
     public List<TasksBoard> AdminFindAll() {
