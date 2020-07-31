@@ -1,12 +1,10 @@
 package com.marcinwo.todolist.frontend.component;
 
-import com.marcinwo.todolist.app.Color;
+import com.github.juchar.colorpicker.ColorPickerField;
 import com.marcinwo.todolist.app.entity.TasksBoard;
 import com.marcinwo.todolist.app.entity.User;
-import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -16,17 +14,15 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import org.vaadin.gatanaso.MultiselectComboBox;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CreateBoardDialog extends Dialog {
 
     private TextField name = new TextField("Name");
-    private ComboBox<String> colour = new ComboBox<>("color");
+    private ColorPickerField colourPicker = new ColorPickerField();
     private MultiselectComboBox<User> users = new MultiselectComboBox<>("Select users");
-
     private Binder<TasksBoard> binder = new BeanValidationBinder<>(TasksBoard.class);
     private TasksBoard tasksBoard = new TasksBoard();
 
@@ -50,24 +46,55 @@ public class CreateBoardDialog extends Dialog {
 
         FormLayout formLayout = new FormLayout();
 
-        List<String> colors = Arrays.stream(Color.values()).map(Enum::name).collect(Collectors.toList());
-        colour.setItems(colors);
+//        List<String> colors = Arrays.stream(Color.values()).map(Enum::name).collect(Collectors.toList());
+//        colour2.setItems(colors);
+
+        createColorPicker(); // #1d1d1d -> Color
+        binder.forField(colourPicker).bind(tb -> {
+            String hex = tb.getColour();
+            if (hex != null) {
+                return new Color(
+                        Integer.valueOf(hex.substring(1, 3), 16),
+                        Integer.valueOf(hex.substring(3, 5), 16),
+                        Integer.valueOf(hex.substring(5, 7), 16));
+            }
+
+            return Color.BLUE;
+
+        }, (tb, c) -> {
+            if (c != null) {
+                String hex = String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue());
+                tb.setColour(hex);
+            }else {
+                tb.setColour("#1d1d1d");
+            }
+
+        });
 
         users.setWidth("100%");
-        users.setLabel("Select items");
+        users.setLabel("Select users");
         users.setPlaceholder("Choose...");
         users.setItemLabelGenerator(User::getUserName);
 
         formLayout.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("25em", 1),
-                new FormLayout.ResponsiveStep("32em", 2));
+                new FormLayout.ResponsiveStep("25em", 2));
 
         formLayout.add(name, 1);
-        formLayout.add(colour, 1);
+        formLayout.add(colourPicker, 1);
         formLayout.add(users, 2);
 
         verticalLayout.add(formLayout, createActionButtons());
         this.add(verticalLayout);
+    }
+
+    private void createColorPicker() {
+        colourPicker.setPinnedPalettes(true);
+        colourPicker.setHexEnabled(true);
+        colourPicker.setPalette(Color.RED, Color.GREEN, Color.BLUE);
+        colourPicker.setChangeFormatButtonVisible(true);
+        colourPicker.setWidth("400px");
+        colourPicker.setHeight("55px");
     }
 
     public HorizontalLayout createActionButtons() {
@@ -80,12 +107,13 @@ public class CreateBoardDialog extends Dialog {
         cancel.getStyle().set("marginRight", "10px");
         save.getStyle().set("marginRight", "10px");
 
+
         return actions;
     }
 
     public TasksBoard getTaskBoard() {
-        String hexColor = Color.valueOf(colour.getValue()).getHexValue();
-        tasksBoard.setColour(hexColor);
+//        String hexColor = Color.valueOf(colour2.getValue()).getHexValue();
+//        tasksBoard.setColour(hexColor);
         tasksBoard.setOwner(currentUser);
         return tasksBoard;
     }
