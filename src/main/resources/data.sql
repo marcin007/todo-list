@@ -15,13 +15,13 @@ VALUES (1, 1),
        (2, 2);
 
 INSERT INTO tasks_boards(user_id, name, colour, has_expired)
-VALUES (1, 'TEKSTY MARYLI', 'RED', false);
+VALUES (1, 'TEKSTY MARYLI', '#45246e', false);
 INSERT INTO tasks_boards(user_id, name, colour, has_expired)
-VALUES (1, 'TEKSTY MARYLI TYMCZASOWE', 'ORANGE', false);
+VALUES (1, 'TEKSTY MARYLI TYMCZASOWE', '#236534', false);
 INSERT INTO tasks_boards(user_id, name, colour, has_expired)
-VALUES (2, 'TRASA ZENKA', 'BLUE', false);
+VALUES (2, 'TRASA ZENKA', '#ab3454', false);
 INSERT INTO tasks_boards(user_id, name, colour, has_expired)
-VALUES (1, 'WSPOLNY NOTES', 'WHITE', false);
+VALUES (1, 'WSPOLNY NOTES', '#543463', false);
 
 INSERT INTO board_users(user_id, tasks_board_id)
 VALUES (1, 1);
@@ -51,5 +51,5 @@ INSERT INTO task_users(user_id, task_id)
 VALUES (2, 1),
        (2, 2),
        (1, 3),
-       (1,4);
+       (1, 4);
 
