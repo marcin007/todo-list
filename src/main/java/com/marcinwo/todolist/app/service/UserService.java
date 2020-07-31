@@ -45,6 +45,10 @@ public class UserService {
         return userRepository.findByIdAndHasExpiredFalse(id).orElseThrow(() -> new UserNotFoundException("User not found."));
     }
 
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUserNameAndHasExpiredFalse(username);
+    }
+
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActivationCode(activationCodeHandler.generateActivationCode());
@@ -71,9 +75,6 @@ public class UserService {
         }
         if (patchUserDTO.getAvatarUrl() != null) {
             user.setAvatarUrl(patchUserDTO.getAvatarUrl());
-        }
-        if (patchUserDTO.getPassword() != null) {
-            user.setPassword(passwordEncoder.encode(patchUserDTO.getPassword()));
         }
         return userRepository.save(user);
     }
