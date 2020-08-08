@@ -5,6 +5,10 @@ values ('Maryla', 'Rodowicz', 'm', '$2a$10$ffNADwF.yPvjUdXkjB4S7eAl5f1/EZXFDeStt
 INSERT INTO users(first_name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
                   is_credentials_expired, has_expired)
 values ('Zenek', 'Martyniuk', 'z', '$2a$10$ffNADwF.yPvjUdXkjB4S7eAl5f1/EZXFDeSttqPYIF5cay3ReNSWi', 'www.haha.pl', false, true, false, false, false);
+INSERT INTO users(first_name, last_name, user_name, password, avatar_url, is_expired, is_enabled, is_locked,
+                  is_credentials_expired, has_expired)
+values ('DistabledName', 'DistabledLastName', 'disabled', '$2a$10$ffNADwF.yPvjUdXkjB4S7eAl5f1/EZXFDeSttqPYIF5cay3ReNSWi', 'www.dis.pl', true, false, true, true, true);
+
 
 INSERT INTO roles(name, has_expired)
 values ('ROLE_ADMIN', false),
