@@ -11,12 +11,17 @@ and
 **[Vaadin](https://vaadin.com/docs/)**.
 The backend of API is complete and secured via
 **[Json Web Token](https://jwt.io/)**.
-For this time you can:
-- register new users
-- login 
-- create tasks board and assing another users to this tasks board 
 
 To make this project complete is only need to write missing forntend.
+
+## Requirements
+This demo is build with with Maven 3.6.x and Java 11.
+
+## Usage
+Just start the application with the Spring Boot maven plugin (`mvn spring-boot:run`). The application is
+running at [http://localhost:8080](http://localhost:8080).
+
+You can use the **H2-Console** for exploring the database under [http://localhost:8080/h2console](http://localhost:8080/h2console):
 
 ## Backend
 
@@ -32,30 +37,72 @@ Endpoints for JWT:
 ```
 /api/authenticate - authentication endpoint with unrestricted access
 ```
-
 Endpoints for Tasks Boad:
 ```
 GET:
-/users/{username}/boards - for current user or admin
-/user/boards - for current user
-/user/boards/{id} - for current user
-
-/boards/{id} - for admin
+/api/users/{username}/boards - for current user or admin
+/api/user/boards - for current user
+/api/user/boards/{id} - for current user
+/api/boards/{id} - for admin
 
 POST:
-/user/boards
+/api/user/boards
 
 PATCH:
-/user/boards/{id} - for current user
-/boards/{id} - for admin
+/api/user/boards/{id} - for current user
+/api/boards/{id} - for admin
 
 DELETE:
-/user/boards/{id} - for current user
-/boards/{id} - for admin
+/api/user/boards/{id} - for current user
+/api/boards/{id} - for admin
 
 ```
+Endpoints for Tasks Controller:
+```
+GET:
+/api/tasks/{id} -  for current user
+/api/user/tasks - for current user
+/api/users/{username}/tasks - for current user or admin
+/api/boards/{id}/tasks - for current user or admin
 
+POST:
+/api/tasks - for current user or admin
+
+PATCH:
+/api/tasks/{id} - for current user
+/api/users/{username}/tasks/{id} - for current user or admin
+
+DELETE:
+/api/tasks/{id} - for current user or admin
+```
+Endpoints for User Controller:
+```
+GET:
+/api/user - for current user 
+/api/users - for admin
+/api/users/{id} - for current user or admin
+
+POST:
+/api/users - for unauthenticated user
+
+PATCH:
+/api/users/{id} - for current user or admin
+
+DELETE:
+/api/users/{id} - for current user or admin
+```
+
+## Frontend
+
+For this time you can:
+- register new users
+- login 
+- create tasks board and assing another users to this tasks board 
 
 ## Documentation
 
 The documentation was generated via Swagger 2
+
+## Copyright and license
+
+The code is released under the [MIT license](LICENSE?raw=true).
