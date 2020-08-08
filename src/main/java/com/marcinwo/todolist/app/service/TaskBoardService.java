@@ -1,7 +1,6 @@
 package com.marcinwo.todolist.app.service;
 
 import com.marcinwo.todolist.api.dto.PatchTaskBoardDTO;
-import com.marcinwo.todolist.api.dto.TasksBoardDTO;
 import com.marcinwo.todolist.app.entity.TasksBoard;
 import com.marcinwo.todolist.app.exception.TasksBoardNotFoundException;
 import com.marcinwo.todolist.app.exception.UserUnauthorizedException;
@@ -12,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Service
 public class TaskBoardService {
@@ -28,9 +27,6 @@ public class TaskBoardService {
 
     public Set<TasksBoard> findAllByUsername(String username) {
         return taskBoardRepository.findAllByUsersUserName(username);
-    }
-    public List<TasksBoard> AdminFindAll() {
-        return taskBoardRepository.findAll();
     }
 
     public TasksBoard findById(Long id) {

@@ -27,11 +27,11 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return userRepository.findAll();
+        return userRepository.findAllByHasExpiredFalse();
     }
 
     public List<User> findAllWithoutCurrentUser() {
-        List<User> users = userRepository.findAll();
+        List<User> users = userRepository.findAllByHasExpiredFalse();
         users.remove(findCurrentUser());
         return users;
     }
