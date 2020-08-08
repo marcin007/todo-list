@@ -43,19 +43,6 @@ public class UserControllerTest {
 
     @Test
     public void given_LoggedInUserIsAdmin_when_getUser_then_returnUsersList() throws Exception{
-        //given
-        List<User> users = ExampleData.getUserList();
-        List<LoggedInUserDTO> dtos = ExampleData.getLoggedInUserDtos();
-
-        //when
-        when(userService.findAll()).thenReturn(users);
-        when(userMapper.toLoggedInUserDTO(anyCollection())).thenReturn(dtos);
-
-        //then
-        mockMvc.perform(get("/users"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().json(JsonUtils.toJsonString(dtos)));
 
     }
 
