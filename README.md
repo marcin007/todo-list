@@ -113,6 +113,7 @@ also you can pick the color of your task board
 ![Screenshot from running application](todo_pic/exampleDataForCreateNewBoard.png?raw=true "H2 Console")
 
 How it looks when you add new tasks board:
+
 ![Screenshot from running application](todo_pic/boards.png?raw=true "H2 Console")
 
 ## Documentation
