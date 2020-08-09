@@ -11,6 +11,9 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.BeanValidationBinder;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.Validator;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +54,26 @@ public class RegisterView extends VerticalLayout {
         formLayout.add(email, 3);
         formLayout.add(password, 1);
         formLayout.add(confirmPassword, 1);
+
+//        Binder<User> binder = new BeanValidationBinder<>(User.class);
+//
+//        binder.forField(password)
+//                .withValidator(Validator.from(s -> s.equals(confirmPassword.getValue()), "Passwords don't match"))
+//                .bind("password");
+//
+//        binder.forField(confirmPassword)
+//                .withValidator(Validator.from(s -> s.equals(password.getValue()), "Passwords don't match"))
+//                .bind("password");
+
+        userName.addValueChangeListener(e -> {
+            String username = e.getValue();
+            if (userService.existsByUsername(username)) {
+                userName.setErrorMessage("Username taken");
+                userName.setInvalid(true);
+            } else {
+                userName.setInvalid(false);
+            }
+        });
 
         HorizontalLayout actions = new HorizontalLayout();
         actions.add(registerButton, resetButton);

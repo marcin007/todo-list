@@ -56,10 +56,6 @@ public class UserControllerTest {
 
     private static String token;
 
-    @Before
-    public void before() {
-
-    }
 
     @Test
     public void given_UserDtoNotLogged_when_getUser_then_returnUsersList() throws Exception{

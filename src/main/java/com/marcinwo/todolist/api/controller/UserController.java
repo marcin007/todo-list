@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/users")//ok
+    @PostMapping("/users")
     public UserDTO postUser(@RequestBody UserDTO userDTO) {
         //email, sms service
         return userMapper.toUserDto(userService.save(userMapper.toUserEntity(userDTO)));
@@ -72,7 +72,7 @@ public class UserController {
 
     @IsAuthenticated
     @PreAuthorize("hasRole('ROLE_ADMIN') or userService.findCurrentUser().getId().equals(#id)")
-    @DeleteMapping("/users/{id}") //ok
+    @DeleteMapping("/users/{id}")
     public ResponseEntity<ApiInfo> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(new ApiInfo("User deleted.", HttpStatus.OK.value()), HttpStatus.OK);

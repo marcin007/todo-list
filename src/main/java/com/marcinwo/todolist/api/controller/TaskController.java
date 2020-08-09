@@ -89,7 +89,7 @@ public class TaskController {
     }
 
 
-    @IsAuthenticated //todo nie zwraca wspólnych taskow, czemu?
+    @IsAuthenticated
     @PreAuthorize("hasRole('ROLE_ADMIN') or #username == authentication.principal.username")
     @GetMapping("/users/{username}/tasks")
     public List<TaskDTO> getTasks(@PathVariable String username) {
@@ -99,7 +99,7 @@ public class TaskController {
 
     @IsAuthenticated
     @PreAuthorize("hasRole('ROLE_ADMIN') or #username == authentication.principal.username")
-    @PatchMapping("/users/{username}/tasks{id}")
+    @PatchMapping("/users/{username}/tasks/{id}")
     public TaskDTO updateTask(@PathVariable String username, @PathVariable Long id) {
         return taskMapper.toTaskDto(taskService.updateTask(username, id));
     }

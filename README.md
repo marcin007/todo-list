@@ -36,26 +36,26 @@ Disabled - disabled:123 (this user is deactivated)
 
 Endpoints for JWT:
 ```
-/api/authenticate - authentication endpoint with unrestricted access
+/api/authenticate - authentication endpoint with unrestricted access. In response you will get generated token.
 ```
-Endpoints for Tasks Boad:
+Endpoints for Tasks Board:
 ```
 GET:
-/api/users/{username}/boards - for current user or admin
-/api/user/boards - for current user
-/api/user/boards/{id} - for current user
-/api/boards/{id} - for admin
+/api/users/{username}/boards - access for current user or admin. In response you will get list of tasks boards given user.
+/api/user/boards - access for current user. In response you will get list of tasks boards logged user.
+/api/user/boards/{id} - access for current user. In response you will get specific tasks board logged user.
+/api/boards/{id} - access for admin. In response you will get specific tasks board.
 
 POST:
-/api/user/boards
+/api/user/boards - access for current user. By this endpoint you can add new tasks board.
 
 PATCH:
-/api/user/boards/{id} - for current user
-/api/boards/{id} - for admin
+/api/user/boards/{id} - access for current user. By this endpoint you can edit specific tasks board.
+/api/boards/{id} - access for admin. By this endpoint you can edit specific tasks board.
 
 DELETE:
-/api/user/boards/{id} - for current user
-/api/boards/{id} - for admin
+/api/user/boards/{id} - access for current user. By this endpoint you can delete specific tasks board.
+/api/boards/{id} - access for admin. By this endpoint you can delete specific tasks board.
 
 ```
 Endpoints for Tasks Controller:
@@ -79,7 +79,7 @@ DELETE:
 Endpoints for User Controller:
 ```
 GET:
-/api/user - for current user 
+/api/user - returns detail information for an authenticated user (a valid JWT token must be present in the request header)
 /api/users - for admin
 /api/users/{id} - for current user or admin
 
