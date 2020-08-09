@@ -1,6 +1,7 @@
 package com.marcinwo.todolist;
 
 import com.marcinwo.todolist.api.dto.LoggedInUserDTO;
+import com.marcinwo.todolist.api.dto.UserDTO;
 import com.marcinwo.todolist.app.entity.User;
 
 import java.util.HashSet;
@@ -28,4 +29,10 @@ public class ExampleData {
         return List.of(new LoggedInUserDTO("www.asd.com", "asd@gmail.com", false, true, false,false),
                 new LoggedInUserDTO("www.qwe.com", "qwe@gmail.com", false, true, false,false));
     }
+
+    public static List<UserDTO> getUserDtoList(){
+        return List.of(new UserDTO(1L, "firstName", "lastName", "userName", false),
+                new UserDTO(1L, "firstName", "lastName", "userName", false));
+    }
+
 }
