@@ -20,6 +20,7 @@ This demo is build with with Maven 3.6.x and Java 11.
 ## Usage
 Just start the application with the Spring Boot maven plugin (`mvn spring-boot:run`). The application is
 running at [http://localhost:8080](http://localhost:8080).
+![Screenshot from running application](todo_pic/h2console.png?raw=true "H2 Console")
 
 You can use the **H2-Console** for exploring the database under [http://localhost:8080/h2console](http://localhost:8080/h2console):
 
@@ -94,14 +95,35 @@ DELETE:
 
 ## Frontend
 
-For this time you can:
-- register new users
-- login 
-- create tasks board and assing another users to this tasks board 
+### For this time you can:
+### - register new users
+![Screenshot from running application](todo_pic/register.png?raw=true "H2 Console")
+
+### - login 
+![Screenshot from running application](todo_pic/login.png?raw=true "H2 Console")
+
+### - create tasks board and assing another users to this tasks board 
+![Screenshot from running application](todo_pic/createNewBoard.png?raw=true "H2 Console")
+
+
+-------------------------------------------------------------------------------------------
+
+
+also you can pick the color of your task board
+![Screenshot from running application](todo_pic/exampleDataForCreateNewBoard.png?raw=true "H2 Console")
+
+How it looks when you add new tasks board:
+![Screenshot from running application](todo_pic/boards.png?raw=true "H2 Console")
 
 ## Documentation
 
-The documentation was generated via Swagger 2
+The documentation was generated via Swagger 2.
+
+![Screenshot from running application](todo_pic/swaggerPic2.png?raw=true "H2 Console")
+
+this is exmaple documentation of ```jwt-controller```
+
+![Screenshot from running application](todo_pic/swaggerPic1.png?raw=true "H2 Console")
 
 ## Copyright and license
 
