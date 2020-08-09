@@ -37,7 +37,7 @@ public class TaskBoardController {
     @GetMapping("/users/{username}/boards")
     public Set<TasksBoardDTO> getAdminOrCurrentUserTasksBoardsById(@PathVariable String username) {
         if ((userService.findCurrentUser().hasRole("ROLE_ADMIN")) || userService.findCurrentUser().getUserName().equals(username)) {
-            return tasksBoardMapper.toTasksBoardDTO(taskBoardService.findAll(username));
+            return tasksBoardMapper.toTasksBoardDTO(taskBoardService.findAllByUsername(username));
         } else {
             throw new UserUnauthorizedException("User unauthorized");
         }
@@ -47,7 +47,7 @@ public class TaskBoardController {
     @GetMapping("/user/boards")
     public Set<TasksBoardDTO> getTasksBoards() {
         String user = userService.findCurrentUser().getUserName();
-        return tasksBoardMapper.toTasksBoardDTO(taskBoardService.findAll(user));
+        return tasksBoardMapper.toTasksBoardDTO(taskBoardService.findAllByUsername(user));
     }
 
 
