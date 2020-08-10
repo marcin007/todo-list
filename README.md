@@ -61,36 +61,36 @@ DELETE:
 Endpoints for Tasks Controller:
 ```
 GET:
-/api/tasks/{id} -  for current user
-/api/user/tasks - for current user
-/api/users/{username}/tasks - for current user or admin
-/api/boards/{id}/tasks - for current user or admin
+/api/tasks/{id} - access for current user. In response you will get specific task logged user.
+/api/user/tasks - access for current user. In response you will get list of tasks logged user.
+/api/users/{username}/tasks - access for current user or admin. In response you will get list of tasks specific user.
+/api/boards/{id}/tasks - access for current user or admin. In response you will get list of tasks specific board.
 
 POST:
-/api/tasks - for current user or admin
+/api/tasks - access for current user or admin. By this endpoint you can add new task.
 
 PATCH:
-/api/tasks/{id} - for current user
-/api/users/{username}/tasks/{id} - for current user or admin
+/api/tasks/{id} - access for current user. By this endpoint you can update specific task by id.
+/api/users/{username}/tasks/{id} - access for current user or admin. By this endpoint you can update specific task by username.
 
 DELETE:
-/api/tasks/{id} - for current user or admin
+/api/tasks/{id} - access for current user or admin. By this endpoint you can delete specific task by id.
 ```
 Endpoints for User Controller:
 ```
 GET:
 /api/user - returns detail information for an authenticated user (a valid JWT token must be present in the request header)
-/api/users - for admin
-/api/users/{id} - for current user or admin
+/api/users - access for admin. In response you will get list of users.
+/api/users/{id} - access for current user or admin. In response you will get specific user by id.
 
 POST:
-/api/users - for unauthenticated user
+/api/users - access for unauthenticated user. By this endpoint you can add new user.
 
 PATCH:
-/api/users/{id} - for current user or admin
+/api/users/{id} - access for current user or admin. By this endpoint you can update specific user by id.
 
 DELETE:
-/api/users/{id} - for current user or admin
+/api/users/{id} - access for current user or admin. By this endpoint you can delete specific user by id.
 ```
 
 ## Frontend
