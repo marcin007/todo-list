@@ -26,14 +26,12 @@ import java.util.List;
 public class TaskController {
 
     private TaskService taskService;
-    private TaskBoardService taskBoardService;
     private CurrentUser currentUser;
     private TaskMapper taskMapper;
 
     @Autowired
-    public TaskController(TaskService taskService, TaskBoardService taskBoardService, CurrentUser currentUser, TaskMapper taskMapper) {
+    public TaskController(TaskService taskService, CurrentUser currentUser, TaskMapper taskMapper) {
         this.taskService = taskService;
-        this.taskBoardService = taskBoardService;
         this.currentUser = currentUser;
         this.taskMapper = taskMapper;
     }

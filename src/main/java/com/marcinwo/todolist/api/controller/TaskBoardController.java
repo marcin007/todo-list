@@ -96,7 +96,7 @@ public class TaskBoardController {
     @IsAuthenticated
     @DeleteMapping("/boards/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<ApiInfo> AdminDeleteById(@PathVariable Long id) {
+    public ResponseEntity<ApiInfo> adminDeleteById(@PathVariable Long id) {
         taskBoardService.deleteById(id);
         return new ResponseEntity<>(new ApiInfo("Tasks Board deleted.", HttpStatus.OK.value()), HttpStatus.OK);
     }
