@@ -18,8 +18,7 @@ To make this project complete is only need to write missing forntend.
 This demo is build with with Maven 3.6.x and Java 11.
 
 ## Usage
-Just start the application with the Spring Boot maven plugin (`mvn spring-boot:run`). The application is
-running at [http://localhost:8080](http://localhost:8080).
+Just start the application with the Spring Boot maven plugin (`mvn spring-boot:run`).
 ![Screenshot from running application](todo_pic/h2console.png?raw=true "H2 Console")
 
 You can use the **H2-Console** for exploring the database under [http://localhost:8080/h2console](http://localhost:8080/h2console):
